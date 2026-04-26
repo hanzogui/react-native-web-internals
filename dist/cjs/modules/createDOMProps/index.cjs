@@ -1,0 +1,387 @@
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all) __defProp(target, name, {
+    get: all[name],
+    enumerable: true
+  });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from)) if (!__hasOwnProp.call(to, key) && key !== except) __defProp(to, key, {
+      get: () => from[key],
+      enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
+    });
+  }
+  return to;
+};
+var __toCommonJS = mod => __copyProps(__defProp({}, "__esModule", {
+  value: true
+}), mod);
+var createDOMProps_exports = {};
+__export(createDOMProps_exports, {
+  createDOMProps: () => createDOMProps,
+  stylesFromProps: () => stylesFromProps
+});
+module.exports = __toCommonJS(createDOMProps_exports);
+var import_web = require("@hanzogui/web");
+var import_AccessibilityUtil = require("../AccessibilityUtil/index.cjs");
+const emptyObject = {};
+const hasOwnProperty = Object.prototype.hasOwnProperty;
+const isArray = Array.isArray;
+const reactNativeOnlyProps = {
+  collapsable: true,
+  contentContainerStyle: true,
+  contentOffset: true,
+  decelerationRate: true,
+  maintainVisibleContentPosition: true,
+  onLayout: true,
+  onMomentumScrollBegin: true,
+  onMomentumScrollEnd: true,
+  onMoveShouldSetResponder: true,
+  onMoveShouldSetResponderCapture: true,
+  onResponderEnd: true,
+  onResponderGrant: true,
+  onResponderMove: true,
+  onResponderReject: true,
+  onResponderRelease: true,
+  onResponderStart: true,
+  onResponderTerminate: true,
+  onResponderTerminationRequest: true,
+  onScrollBeginDrag: true,
+  onScrollEndDrag: true,
+  onScrollShouldSetResponder: true,
+  onScrollShouldSetResponderCapture: true,
+  onSelectionChangeShouldSetResponder: true,
+  onSelectionChangeShouldSetResponderCapture: true,
+  onStartShouldSetResponder: true,
+  onStartShouldSetResponderCapture: true,
+  refreshControl: true,
+  removeClippedSubviews: true,
+  scrollEnabled: true,
+  scrollEventThrottle: true,
+  scrollIndicatorInsets: true,
+  showsHorizontalScrollIndicator: true,
+  showsVerticalScrollIndicator: true,
+  snapToAlignment: true,
+  snapToEnd: true,
+  snapToInterval: true,
+  snapToOffsets: true,
+  snapToStart: true,
+  stickyHeaderIndices: true,
+  ScrollComponent: true
+};
+const uppercasePattern = /[A-Z]/g;
+function toHyphenLower(match) {
+  return "-" + match.toLowerCase();
+}
+function hyphenateString(str) {
+  return str.replace(uppercasePattern, toHyphenLower);
+}
+function processIDRefList(idRefList) {
+  return isArray(idRefList) ? idRefList.join(" ") : idRefList;
+}
+function flattenStyle(style) {
+  if (style === null || typeof style !== "object") {
+    return void 0;
+  }
+  if (!isArray(style)) {
+    return style;
+  }
+  const result = {};
+  for (let i = 0, styleLength = style.length; i < styleLength; ++i) {
+    const computedStyle = flattenStyle(style[i]);
+    if (computedStyle) {
+      for (const key in computedStyle) {
+        if (hasOwnProperty.call(computedStyle, key)) {
+          result[key] = computedStyle[key];
+        }
+      }
+    }
+  }
+  return result;
+}
+const stylesFromProps = /* @__PURE__ */new WeakMap();
+const createDOMProps = (elementType, props, options) => {
+  if (!props) {
+    props = emptyObject;
+  }
+  const {
+    accessibilityActiveDescendant,
+    accessibilityAtomic,
+    accessibilityAutoComplete,
+    accessibilityBusy,
+    accessibilityChecked,
+    accessibilityColumnCount,
+    accessibilityColumnIndex,
+    accessibilityColumnSpan,
+    accessibilityControls,
+    accessibilityCurrent,
+    accessibilityDescribedBy,
+    accessibilityDetails,
+    accessibilityDisabled,
+    accessibilityErrorMessage,
+    accessibilityExpanded,
+    accessibilityFlowTo,
+    accessibilityHasPopup,
+    accessibilityHidden,
+    accessibilityInvalid,
+    accessibilityKeyShortcuts,
+    accessibilityLabel,
+    accessibilityLabelledBy,
+    accessibilityLevel,
+    accessibilityLiveRegion,
+    accessibilityModal,
+    accessibilityMultiline,
+    accessibilityMultiSelectable,
+    accessibilityOrientation,
+    accessibilityOwns,
+    accessibilityPlaceholder,
+    accessibilityPosInSet,
+    accessibilityPressed,
+    accessibilityReadOnly,
+    accessibilityRequired,
+    /* eslint-disable */
+    accessibilityRole,
+    /* eslint-enable */
+    accessibilityRoleDescription,
+    accessibilityRowCount,
+    accessibilityRowIndex,
+    accessibilityRowSpan,
+    accessibilitySelected,
+    accessibilitySetSize,
+    accessibilitySort,
+    accessibilityValueMax,
+    accessibilityValueMin,
+    accessibilityValueNow,
+    accessibilityValueText,
+    dataSet,
+    focusable,
+    nativeID,
+    pointerEvents,
+    style,
+    testID,
+    id,
+    // Rest
+    ...domProps
+  } = props;
+  for (const key in domProps) {
+    if (reactNativeOnlyProps[key]) {
+      delete domProps[key];
+    }
+  }
+  const disabled = accessibilityDisabled;
+  const role = import_AccessibilityUtil.AccessibilityUtil.propsToAriaRole(props);
+  if (accessibilityActiveDescendant != null) {
+    domProps["aria-activedescendant"] = accessibilityActiveDescendant;
+  }
+  if (accessibilityAtomic != null) {
+    domProps["aria-atomic"] = accessibilityAtomic;
+  }
+  if (accessibilityAutoComplete != null) {
+    domProps["aria-autocomplete"] = accessibilityAutoComplete;
+  }
+  if (accessibilityBusy != null) {
+    domProps["aria-busy"] = accessibilityBusy;
+  }
+  if (accessibilityChecked != null) {
+    domProps["aria-checked"] = accessibilityChecked;
+  }
+  if (accessibilityColumnCount != null) {
+    domProps["aria-colcount"] = accessibilityColumnCount;
+  }
+  if (accessibilityColumnIndex != null) {
+    domProps["aria-colindex"] = accessibilityColumnIndex;
+  }
+  if (accessibilityColumnSpan != null) {
+    domProps["aria-colspan"] = accessibilityColumnSpan;
+  }
+  if (accessibilityControls != null) {
+    domProps["aria-controls"] = processIDRefList(accessibilityControls);
+  }
+  if (accessibilityCurrent != null) {
+    domProps["aria-current"] = accessibilityCurrent;
+  }
+  if (accessibilityDescribedBy != null) {
+    domProps["aria-describedby"] = processIDRefList(accessibilityDescribedBy);
+  }
+  if (accessibilityDetails != null) {
+    domProps["aria-details"] = accessibilityDetails;
+  }
+  if (disabled === true) {
+    domProps["aria-disabled"] = true;
+    if (elementType === "button" || elementType === "form" || elementType === "input" || elementType === "select" || elementType === "textarea") {
+      domProps.disabled = true;
+    }
+  }
+  if (accessibilityErrorMessage != null) {
+    domProps["aria-errormessage"] = accessibilityErrorMessage;
+  }
+  if (accessibilityExpanded != null) {
+    domProps["aria-expanded"] = accessibilityExpanded;
+  }
+  if (accessibilityFlowTo != null) {
+    domProps["aria-flowto"] = processIDRefList(accessibilityFlowTo);
+  }
+  if (accessibilityHasPopup != null) {
+    domProps["aria-haspopup"] = accessibilityHasPopup;
+  }
+  if (accessibilityHidden === true) {
+    domProps["aria-hidden"] = accessibilityHidden;
+  }
+  if (accessibilityInvalid != null) {
+    domProps["aria-invalid"] = accessibilityInvalid;
+  }
+  if (accessibilityKeyShortcuts != null && Array.isArray(accessibilityKeyShortcuts)) {
+    domProps["aria-keyshortcuts"] = accessibilityKeyShortcuts.join(" ");
+  }
+  if (accessibilityLabel != null) {
+    domProps["aria-label"] = accessibilityLabel;
+  }
+  if (accessibilityLabelledBy != null) {
+    domProps["aria-labelledby"] = processIDRefList(accessibilityLabelledBy);
+  }
+  if (accessibilityLevel != null) {
+    domProps["aria-level"] = accessibilityLevel;
+  }
+  if (accessibilityLiveRegion != null) {
+    domProps["aria-live"] = accessibilityLiveRegion === "none" ? "off" : accessibilityLiveRegion;
+  }
+  if (accessibilityModal != null) {
+    domProps["aria-modal"] = accessibilityModal;
+  }
+  if (accessibilityMultiline != null) {
+    domProps["aria-multiline"] = accessibilityMultiline;
+  }
+  if (accessibilityMultiSelectable != null) {
+    domProps["aria-multiselectable"] = accessibilityMultiSelectable;
+  }
+  if (accessibilityOrientation != null) {
+    domProps["aria-orientation"] = accessibilityOrientation;
+  }
+  if (accessibilityOwns != null) {
+    domProps["aria-owns"] = processIDRefList(accessibilityOwns);
+  }
+  if (accessibilityPlaceholder != null) {
+    domProps["aria-placeholder"] = accessibilityPlaceholder;
+  }
+  if (accessibilityPosInSet != null) {
+    domProps["aria-posinset"] = accessibilityPosInSet;
+  }
+  if (accessibilityPressed != null) {
+    domProps["aria-pressed"] = accessibilityPressed;
+  }
+  if (accessibilityReadOnly != null) {
+    domProps["aria-readonly"] = accessibilityReadOnly;
+    if (elementType === "input" || elementType === "select" || elementType === "textarea") {
+      domProps.readOnly = true;
+    }
+  }
+  if (accessibilityRequired != null) {
+    domProps["aria-required"] = accessibilityRequired;
+    if (elementType === "input" || elementType === "select" || elementType === "textarea") {
+      domProps.required = true;
+    }
+  }
+  if (role != null) {
+    domProps["role"] = role === "none" ? "presentation" : role;
+  }
+  if (accessibilityRoleDescription != null) {
+    domProps["aria-roledescription"] = accessibilityRoleDescription;
+  }
+  if (accessibilityRowCount != null) {
+    domProps["aria-rowcount"] = accessibilityRowCount;
+  }
+  if (accessibilityRowIndex != null) {
+    domProps["aria-rowindex"] = accessibilityRowIndex;
+  }
+  if (accessibilityRowSpan != null) {
+    domProps["aria-rowspan"] = accessibilityRowSpan;
+  }
+  if (accessibilitySelected != null) {
+    domProps["aria-selected"] = accessibilitySelected;
+  }
+  if (accessibilitySetSize != null) {
+    domProps["aria-setsize"] = accessibilitySetSize;
+  }
+  if (accessibilitySort != null) {
+    domProps["aria-sort"] = accessibilitySort;
+  }
+  if (accessibilityValueMax != null) {
+    domProps["aria-valuemax"] = accessibilityValueMax;
+  }
+  if (accessibilityValueMin != null) {
+    domProps["aria-valuemin"] = accessibilityValueMin;
+  }
+  if (accessibilityValueNow != null) {
+    domProps["aria-valuenow"] = accessibilityValueNow;
+  }
+  if (accessibilityValueText != null) {
+    domProps["aria-valuetext"] = accessibilityValueText;
+  }
+  const tmgCN = dataSet ? dataSet.className : void 0;
+  const tmgID = dataSet ? dataSet.id : void 0;
+  if (dataSet != null) {
+    for (const dataProp in dataSet) {
+      if (dataProp === "className" || dataProp === "id") continue;
+      if (hasOwnProperty.call(dataSet, dataProp)) {
+        const dataName = hyphenateString(dataProp);
+        const dataValue = dataSet[dataProp];
+        if (dataValue != null) {
+          domProps[`data-${dataName}`] = dataValue;
+        }
+      }
+    }
+  }
+  if (focusable === false) {
+    domProps.tabIndex = "-1";
+  }
+  if (
+  // These native elements are keyboard focusable by default
+  elementType === "a" || elementType === "button" || elementType === "input" || elementType === "select" || elementType === "textarea") {
+    if (focusable === false || accessibilityDisabled === true) {
+      domProps.tabIndex = "-1";
+    }
+  } else if (
+  // These roles are made keyboard focusable by default
+  role === "button" || role === "checkbox" || role === "link" || role === "radio" || role === "textbox" || role === "switch") {
+    if (focusable !== false) {
+      domProps.tabIndex = "0";
+    }
+  } else {
+    if (focusable === true) {
+      domProps.tabIndex = "0";
+    }
+  }
+  const flat = flattenStyle(style);
+  let className = tmgCN || "";
+  if (props.className) {
+    className += ` ${props.className}`;
+  }
+  const stylesAtomic = flat ? (0, import_web.getCSSStylesAtomic)(flat) : [];
+  stylesFromProps.set(domProps, stylesAtomic);
+  domProps.style = stylesAtomic.reduce((acc, [key, value]) => {
+    if (key[0] === "_" || key.startsWith("is_") || key.startsWith("font_")) {
+      className += ` ${key}`;
+      return acc;
+    }
+    if (key === "$$css" || key === "") {
+      return acc;
+    }
+    acc[key] = value;
+    return acc;
+  }, {});
+  if (className) {
+    domProps.className = className;
+  }
+  const _id = tmgID || id || nativeID;
+  if (_id) {
+    domProps.id = _id;
+  }
+  if (testID != null) {
+    domProps["data-testid"] = testID;
+  }
+  return domProps;
+};

@@ -1,0 +1,61 @@
+{
+  "name": "@hanzogui/react-native-web-internals",
+  "version": "2.0.0",
+  "description": "React Native for Web",
+  "keywords": [
+    "react",
+    "react-component",
+    "react-native",
+    "web"
+  ],
+  "license": "MIT",
+  "files": [
+    "types",
+    "dist",
+    "src"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "main": "dist/cjs",
+  "module": "dist/esm",
+  "typings": "./types/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./types/index.d.ts",
+      "browser": "./dist/esm/index.mjs",
+      "module": "./dist/esm/index.mjs",
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/cjs/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "hanzo-gui-build --skip-native",
+    "watch": "hanzo-gui-build --skip-native --watch",
+    "clean": "hanzo-gui-build clean",
+    "clean:build": "hanzo-gui-build clean:build"
+  },
+  "dependencies": {
+    "@hanzogui/normalize-css-color": "^2.0.0",
+    "@hanzogui/react-native-use-pressable": "^2.0.0",
+    "@hanzogui/react-native-use-responder-events": "^2.0.0",
+    "@hanzogui/simple-hash": "^2.0.0",
+    "@hanzogui/use-element-layout": "^2.0.0",
+    "@hanzogui/web": "^2.0.0"
+  },
+  "devDependencies": {
+    "@hanzogui/build": "^2.0.0",
+    "react": ">=19",
+    "react-dom": "*"
+  },
+  "peerDependencies": {
+    "react": ">=19",
+    "react-dom": "*"
+  },
+  "tags": [
+    "react"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

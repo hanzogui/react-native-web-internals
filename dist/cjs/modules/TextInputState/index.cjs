@@ -1,0 +1,70 @@
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all) __defProp(target, name, {
+    get: all[name],
+    enumerable: true
+  });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from)) if (!__hasOwnProp.call(to, key) && key !== except) __defProp(to, key, {
+      get: () => from[key],
+      enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
+    });
+  }
+  return to;
+};
+var __toCommonJS = mod => __copyProps(__defProp({}, "__esModule", {
+  value: true
+}), mod);
+var TextInputState_exports = {};
+__export(TextInputState_exports, {
+  TextInputState: () => TextInputState
+});
+module.exports = __toCommonJS(TextInputState_exports);
+var import_UIManager = require("../UIManager/index.cjs");
+const TextInputState = {
+  /**
+   * Internal state
+   */
+  _currentlyFocusedNode: null,
+  /**
+   * Returns the ID of the currently focused text field, if one exists
+   * If no text field is focused it returns null
+   */
+  currentlyFocusedField() {
+    if (document.activeElement !== this._currentlyFocusedNode) {
+      this._currentlyFocusedNode = null;
+    }
+    return this._currentlyFocusedNode;
+  },
+  /**
+   * @param {Object} TextInputID id of the text field to focus
+   * Focuses the specified text field
+   * noop if the text field was already focused
+   */
+  focusTextInput(textFieldNode) {
+    if (textFieldNode !== null) {
+      this._currentlyFocusedNode = textFieldNode;
+      if (document.activeElement !== textFieldNode) {
+        import_UIManager.UIManager.focus(textFieldNode);
+      }
+    }
+  },
+  /**
+   * @param {Object} textFieldNode id of the text field to focus
+   * Unfocuses the specified text field
+   * noop if it wasn't focused
+   */
+  blurTextInput(textFieldNode) {
+    if (textFieldNode !== null) {
+      this._currentlyFocusedNode = null;
+      if (document.activeElement === textFieldNode) {
+        import_UIManager.UIManager.blur(textFieldNode);
+      }
+    }
+  }
+};

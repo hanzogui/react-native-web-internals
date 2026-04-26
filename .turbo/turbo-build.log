@@ -1,0 +1,2 @@
+$ hanzo-gui-build --skip-native
+built @hanzogui/react-native-web-internals in 7830 ms

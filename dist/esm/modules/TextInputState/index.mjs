@@ -1,0 +1,45 @@
+import { UIManager } from "../UIManager/index.mjs";
+const TextInputState = {
+  /**
+   * Internal state
+   */
+  _currentlyFocusedNode: null,
+  /**
+   * Returns the ID of the currently focused text field, if one exists
+   * If no text field is focused it returns null
+   */
+  currentlyFocusedField() {
+    if (document.activeElement !== this._currentlyFocusedNode) {
+      this._currentlyFocusedNode = null;
+    }
+    return this._currentlyFocusedNode;
+  },
+  /**
+   * @param {Object} TextInputID id of the text field to focus
+   * Focuses the specified text field
+   * noop if the text field was already focused
+   */
+  focusTextInput(textFieldNode) {
+    if (textFieldNode !== null) {
+      this._currentlyFocusedNode = textFieldNode;
+      if (document.activeElement !== textFieldNode) {
+        UIManager.focus(textFieldNode);
+      }
+    }
+  },
+  /**
+   * @param {Object} textFieldNode id of the text field to focus
+   * Unfocuses the specified text field
+   * noop if it wasn't focused
+   */
+  blurTextInput(textFieldNode) {
+    if (textFieldNode !== null) {
+      this._currentlyFocusedNode = null;
+      if (document.activeElement === textFieldNode) {
+        UIManager.blur(textFieldNode);
+      }
+    }
+  }
+};
+export { TextInputState };
+//# sourceMappingURL=index.mjs.map
